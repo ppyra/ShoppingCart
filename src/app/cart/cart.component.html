@@ -1,0 +1,5 @@
+<p>
+	Shopping Cart: <button color="accent" role="button" [disabled]="state.cart.length < 1" (click)="checkout()">
+    <strong>shopping_cart</strong>
+     Checkout {{ state.cart.length }} Item{{ state.cart.length > 1 ? 's' : '' }}</button>
+</p>

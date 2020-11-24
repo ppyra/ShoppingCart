@@ -1,0 +1,13 @@
+// from medium up
+@mixin medium-up {
+    @media (min-width: #{$bp-medium}) {
+        @content
+    }
+}
+
+// form high up
+@mixin large-up {
+    @media (min-width: #{$bp-large}) {
+        @content
+    }
+}
