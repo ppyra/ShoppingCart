@@ -1,0 +1,10 @@
+<div class="list-items">
+    <div class="list-item" *ngFor="let item of items">
+      <product-item
+        [name]="item.name"
+        [price]="item.price"
+        [id]="item.id"
+        [currency]="item.currency">
+      </product-item>
+    </div>
+  </div>

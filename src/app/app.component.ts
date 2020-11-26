@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { of, Observable, from } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { last, takeLast } from 'rxjs/operators';
-import { CartItem, ShoppingCartService } from './services/shopping-cart.service';
-// import { ShoppingCartService, CartItem, Totals } from './shopping-cart.service';
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Observable, from } from 'rxjs';
+import { Product } from './models/product';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app',
@@ -12,15 +11,15 @@ import { CartItem, ShoppingCartService } from './services/shopping-cart.service'
 })
 export class AppComponent {
   name = 'Shopping Cart';
-  cartState$ = this.shoppingCartService.state$;
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  public shoppingCartItems$: Observable<Product[]>;
 
-  addItemToCart(item: CartItem) {
-    this.shoppingCartService.addCartItem(item);
-  }
+  constructor(private cartService: CartService, public location: Location) {
 
-  remove(item: CartItem): void {
-    this.shoppingCartService.removeCartItem(item);
+    this.shoppingCartItems$ = this
+      .cartService
+      .getItems();
+
+    this.shoppingCartItems$.subscribe(items => items);
   }
 
 }

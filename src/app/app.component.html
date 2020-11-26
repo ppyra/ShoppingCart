@@ -1,44 +1,4 @@
-<app-navbar></app-navbar>
-<h2>{{ name }}</h2>
-
-<ng-container *ngIf="cartState$ | async as state">
-	<app-cart [state]="state"></app-cart>
-	<div>
-		<header>
-			<h2>Total: {{ state.tot.subTot | currency:'USD':'symbol':'1.2-2' }}</h2>
-
-			<p>
-				tax: {{ state.tot.tax | currency:'USD':'symbol':'1.2-2' }}
-				<br />
-          at checkout: {{ state.tot.grandTot | currency:'USD':'symbol':'1.2-2' }}
-      </p>
-    </header>
-      <div>
-        <ul>
-          <li *ngFor="let item of state.cart" [removable]="true" (click)="remove(item)">{{ item.name }}
-            <button matChipRemove>cancel</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  <hr />
-	<div *ngFor="let item of state.store">
-		<header>
-			{{ item.name }}
-		</header>		
-    <div>
-      
-      <ul>
-        <li>{{ item.details }}</li>
-        <li>{{ item.price | currency:'USD':'symbol':'1.2-2' }}</li>
-      </ul>
-    </div>
-    <div>
-
-		<button mat-flat-button color="primary" role="button" (click)="addItemToCart(item)">
-      <mat-icon>add_shopping_cart</mat-icon>
-      Add to cart
-    </button>
-  </div>
+<div class="nav-bar">
+    <a *ngIf="location.path() !== '/products'" routerLink="/" class="back-button">Back</a>
 </div>
-</ng-container>
+  <router-outlet></router-outlet>
