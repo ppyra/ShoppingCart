@@ -1,13 +1,15 @@
 <div class="bg">
-    <p>You have {{shoppingCartItems.length}} items in your bag</p>
+    <p>You have {{getCount()}} items in your bag</p>
     <div *ngFor="let item of shoppingCartItems">
-    <product-item
-        [id]="item.id"
-        [name]="item.name"
-        [price]="item.price"
-        [currency]="item.currency">
-    </product-item>
-    <button class="remove-item" (click)="removeItem(item)">Remove</button>
+        <product-item
+            [id]="item.id"
+            [name]="item.name"
+            [price]="item.price"
+            [currency]="item.currency">
+        </product-item>
+        <button class="remove-item" (click)="removeItem(item)">-</button>
+        <input [value]="item.pieces" readonly>
+        <button class="remove-item" (click)="increase(item)">+</button>
     </div>
     <p>Total: {{getTotal()}}</p>
 </div>

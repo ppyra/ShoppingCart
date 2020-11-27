@@ -13,7 +13,27 @@ export class CartService {
   }
 
   public addToCart(item: Product) {
-    this.itemsInCartSubject.next([...this.itemsInCart, item]);
+    const exist = this.itemsInCart.some(el => el.id === item.id);
+    if(exist) {
+      // this.itemsInCart.map(el => {
+      //   if(el.id === item.id) {
+      //     el.pieces >=0 ? el.pieces++ : el.pieces = 0;
+      //   }
+      // });
+      this.increase(item);
+      // this.itemsInCartSubject.next(this.itemsInCart);
+    } else {
+      item.pieces = 1;
+      this.itemsInCartSubject.next([...this.itemsInCart, item]);
+    }
+  }
+  increase(item: Product) {
+    this.itemsInCart.map(el => {
+      if(el.id === item.id) {
+        el.pieces >=0 ? el.pieces++ : el.pieces = 0;
+      }
+    });
+    this.itemsInCartSubject.next(this.itemsInCart);
   }
 
   public getItems(): Observable<Product[]> {
@@ -23,14 +43,27 @@ export class CartService {
   public getTotalAmount(): Observable<number> {
     return this.itemsInCartSubject.pipe(map((items: Product[]) => {
       return items.reduce((prev, curr: Product) => {
-        return prev + curr.price;
+        return prev + (curr.price * curr.pieces);
       }, 0);
     }));
   }
 
   public removeFromCart(item: Product) {
-    const currentItems = [...this.itemsInCart];
-    const itemsWithoutRemoved = currentItems.filter(el => el.id !== item.id);
-    this.itemsInCartSubject.next(itemsWithoutRemoved);
+    let currentItems = [...this.itemsInCart];
+    let doFilter = false;
+    currentItems.map(el => {
+      if(el.id === item.id) {
+        if(el.pieces &&  el.pieces > 0) {
+          el.pieces--;
+          el.pieces === 0 ? doFilter = true : doFilter = false;
+        } else {
+          doFilter = true;
+        }
+      }
+    });
+    if (doFilter) {
+      currentItems = currentItems.filter(el => el.id !== item.id);
+    }
+    this.itemsInCartSubject.next(currentItems);
   }
 }

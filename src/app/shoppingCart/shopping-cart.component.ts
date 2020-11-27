@@ -23,6 +23,11 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
   }
+  getCount() {
+    let counter = 0;
+    this.shoppingCartItems.forEach(el => counter =+ el.pieces);
+    return counter;
+  }
 
   getTotal(){
     let total = 0;
@@ -37,5 +42,7 @@ export class ShoppingCartComponent implements OnInit {
   public removeItem(item: Product) {
     this.cartService.removeFromCart(item)
   }
-
+  increase(item) {
+    this.cartService.increase(item);
+  }
 }

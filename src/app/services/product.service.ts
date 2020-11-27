@@ -21,15 +21,15 @@ export class ProductsService {
 
   private products(): Observable<Product[]> {
     return of(<Product[]>[
-      <Product>{id: 1, name: 'Audi Adama', price: 123.09},
-      <Product>{id: 2, name: 'kurs xslt', price: 99.09},
-      <Product>{id: 3, name: 'ksiazka agile MaRKA', price: 99.09},
-      <Product>{id: 4, name: 'Usługi scrum', price: 99.09},
-      <Product>{id: 5, name: 'ksiazki vue', price: 99.09},
-      <Product>{id: 6, name: 'Srue', price: 99.09},
-      <Product>{id: 7, name: 'Sasha Gray', price: 99.09},
-      <Product>{id: 8, name: 'Elo Damian', price: 99.09},
-      <Product>{id: 9, name: 'DMI', price: 99.09},
+      <Product>{id: 1, name: 'Buty', price: 123.09},
+      <Product>{id: 2, name: 'Torebka', price: 99.09},
+      <Product>{id: 3, name: 'Kurtka', price: 99.09},
+      <Product>{id: 4, name: 'Czapka', price: 9.09},
+      <Product>{id: 5, name: 'Szalik', price: 9.09},
+      <Product>{id: 6, name: 'Rekawiczki', price: 19.09},
+      <Product>{id: 7, name: 'Okulary', price: 99.09},
+      <Product>{id: 8, name: 'Skarpetki', price: 9.09},
+      <Product>{id: 9, name: 'Pasek', price: 99.09},
     ]);
   }
 }
